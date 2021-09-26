@@ -48,25 +48,27 @@
         if((pathDelimiter = rest.find(impl_->pathDelimiter)) != std::string::npos){
             if(pathDelimiter == (rest.length() - impl_->pathDelimiter.length()))
             {
-                std::string isDelimeter(rest.find(impl_->pathDelimiter), rest.length());
+                std::string isDelimeter = rest.substr(rest.find(impl_->pathDelimiter), rest.length());
                 if (isDelimeter == impl_->pathDelimiter)
                     isLastDelimeter = true;
             }
         }
-        while(!rest.empty()){
-            pathDelimiter = rest.find(impl_->pathDelimiter);
-            if(pathDelimiter == std::string::npos){
-                pathDelimiter = rest.length();
-                isLast = true;
+        if(!(rest.length() == impl_->pathDelimiter.length() && isLastDelimeter == true)){
+            while(!rest.empty() ){
+                pathDelimiter = rest.find(impl_->pathDelimiter);
+                if(pathDelimiter == std::string::npos){
+                    pathDelimiter = rest.length();
+                    isLast = true;
+                }
+                impl_->path.emplace_back(
+                    rest.begin(),
+                    rest.begin() + pathDelimiter 
+                );
+                if(isLast == true)
+                    rest = rest.substr(pathDelimiter);
+                else
+                    rest = rest.substr(pathDelimiter + impl_->pathDelimiter.length());
             }
-            impl_->path.emplace_back(
-                rest.begin(),
-                rest.begin() + pathDelimiter 
-            );
-            if(isLast == true)
-                rest = rest.substr(pathDelimiter);
-            else
-                rest = rest.substr(pathDelimiter + impl_->pathDelimiter.length());
         }
         if(isLastDelimeter == true)
             impl_->path.push_back("");

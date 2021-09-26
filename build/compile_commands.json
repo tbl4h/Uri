@@ -1,37 +1,32 @@
 [
 {
-  "directory": "/mnt/Pliki_Mic/C++/Youtube/Uri/build",
-  "command": "/bin/x86_64-linux-gnu-g++-9    -g -fPIC   -std=gnu++11 -o CMakeFiles/Uri.dir/Uri.cpp.o -c /mnt/Pliki_Mic/C++/Youtube/Uri/Uri.cpp",
-  "file": "/mnt/Pliki_Mic/C++/Youtube/Uri/Uri.cpp"
+  "directory": "/mntpliki_mic/C++/Youtube/Uri/build",
+  "command": "/bin/x86_64-linux-gnu-g++-9    -g -fPIC   -std=gnu++11 -o CMakeFiles/Uri.dir/Uri.cpp.o -c /mntpliki_mic/C++/Youtube/Uri/Uri.cpp",
+  "file": "/mntpliki_mic/C++/Youtube/Uri/Uri.cpp"
 },
-
 {
-  "directory": "/mnt/Pliki_Mic/C++/Youtube/Uri/build",
-  "command": "/bin/x86_64-linux-gnu-g++-9   -isystem ../googletest/googlemock/include -isystem ../googletest/googlemock -isystem ../googletest/googletest/include -isystem ../googletest/googletest  -g -fPIC   -Wall -Wshadow -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -std=c++11 -o googletest/googlemock/CMakeFiles/gmock_main.dir/src/gmock_main.cc.o -c /mnt/Pliki_Mic/C++/Youtube/Uri/googletest/googlemock/src/gmock_main.cc",
-  "file": "/mnt/Pliki_Mic/C++/Youtube/Uri/googletest/googlemock/src/gmock_main.cc"
+  "directory": "/mntpliki_mic/C++/Youtube/Uri/build/googletest/googlemock",
+  "command": "/bin/x86_64-linux-gnu-g++-9   -isystem /mntpliki_mic/C++/Youtube/Uri/googletest/googlemock/include -isystem /mntpliki_mic/C++/Youtube/Uri/googletest/googlemock -isystem /mntpliki_mic/C++/Youtube/Uri/googletest/googletest/include -isystem /mntpliki_mic/C++/Youtube/Uri/googletest/googletest  -g -fPIC   -Wall -Wshadow -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -std=c++11 -o CMakeFiles/gmock_main.dir/src/gmock_main.cc.o -c /mntpliki_mic/C++/Youtube/Uri/googletest/googlemock/src/gmock_main.cc",
+  "file": "/mntpliki_mic/C++/Youtube/Uri/googletest/googlemock/src/gmock_main.cc"
 },
-
 {
-  "directory": "/mnt/Pliki_Mic/C++/Youtube/Uri/build",
-  "command": "/bin/x86_64-linux-gnu-g++-9   -I../googletest/googlemock/include -I../googletest/googlemock -isystem ../googletest/googletest/include -isystem ../googletest/googletest  -g -fPIC   -Wall -Wshadow -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -std=c++11 -o googletest/googlemock/CMakeFiles/gmock.dir/src/gmock-all.cc.o -c /mnt/Pliki_Mic/C++/Youtube/Uri/googletest/googlemock/src/gmock-all.cc",
-  "file": "/mnt/Pliki_Mic/C++/Youtube/Uri/googletest/googlemock/src/gmock-all.cc"
+  "directory": "/mntpliki_mic/C++/Youtube/Uri/build/googletest/googlemock",
+  "command": "/bin/x86_64-linux-gnu-g++-9   -I/mntpliki_mic/C++/Youtube/Uri/googletest/googlemock/include -I/mntpliki_mic/C++/Youtube/Uri/googletest/googlemock -isystem /mntpliki_mic/C++/Youtube/Uri/googletest/googletest/include -isystem /mntpliki_mic/C++/Youtube/Uri/googletest/googletest  -g -fPIC   -Wall -Wshadow -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -std=c++11 -o CMakeFiles/gmock.dir/src/gmock-all.cc.o -c /mntpliki_mic/C++/Youtube/Uri/googletest/googlemock/src/gmock-all.cc",
+  "file": "/mntpliki_mic/C++/Youtube/Uri/googletest/googlemock/src/gmock-all.cc"
 },
-
 {
-  "directory": "/mnt/Pliki_Mic/C++/Youtube/Uri/build",
-  "command": "/bin/x86_64-linux-gnu-g++-9   -isystem ../googletest/googletest/include -isystem ../googletest/googletest  -g -fPIC   -Wall -Wshadow -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -std=c++11 -o googletest/googletest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o -c /mnt/Pliki_Mic/C++/Youtube/Uri/googletest/googletest/src/gtest_main.cc",
-  "file": "/mnt/Pliki_Mic/C++/Youtube/Uri/googletest/googletest/src/gtest_main.cc"
+  "directory": "/mntpliki_mic/C++/Youtube/Uri/build/googletest/googletest",
+  "command": "/bin/x86_64-linux-gnu-g++-9   -isystem /mntpliki_mic/C++/Youtube/Uri/googletest/googletest/include -isystem /mntpliki_mic/C++/Youtube/Uri/googletest/googletest  -g -fPIC   -Wall -Wshadow -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -std=c++11 -o CMakeFiles/gtest_main.dir/src/gtest_main.cc.o -c /mntpliki_mic/C++/Youtube/Uri/googletest/googletest/src/gtest_main.cc",
+  "file": "/mntpliki_mic/C++/Youtube/Uri/googletest/googletest/src/gtest_main.cc"
 },
-
 {
-  "directory": "/mnt/Pliki_Mic/C++/Youtube/Uri/build",
-  "command": "/bin/x86_64-linux-gnu-g++-9   -I../googletest/googletest/include -I../googletest/googletest  -g -fPIC   -Wall -Wshadow -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -std=c++11 -o googletest/googletest/CMakeFiles/gtest.dir/src/gtest-all.cc.o -c /mnt/Pliki_Mic/C++/Youtube/Uri/googletest/googletest/src/gtest-all.cc",
-  "file": "/mnt/Pliki_Mic/C++/Youtube/Uri/googletest/googletest/src/gtest-all.cc"
+  "directory": "/mntpliki_mic/C++/Youtube/Uri/build/googletest/googletest",
+  "command": "/bin/x86_64-linux-gnu-g++-9   -I/mntpliki_mic/C++/Youtube/Uri/googletest/googletest/include -I/mntpliki_mic/C++/Youtube/Uri/googletest/googletest  -g -fPIC   -Wall -Wshadow -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -std=c++11 -o CMakeFiles/gtest.dir/src/gtest-all.cc.o -c /mntpliki_mic/C++/Youtube/Uri/googletest/googletest/src/gtest-all.cc",
+  "file": "/mntpliki_mic/C++/Youtube/Uri/googletest/googletest/src/gtest-all.cc"
 },
-
 {
-  "directory": "/mnt/Pliki_Mic/C++/Youtube/Uri/build",
-  "command": "/bin/x86_64-linux-gnu-g++-9   -isystem ../googletest/googletest/include -isystem ../googletest/googletest  -g -fPIE   -std=gnu++11 -o test/CMakeFiles/UriTests.dir/UriTests.cpp.o -c /mnt/Pliki_Mic/C++/Youtube/Uri/test/UriTests.cpp",
-  "file": "/mnt/Pliki_Mic/C++/Youtube/Uri/test/UriTests.cpp"
+  "directory": "/mntpliki_mic/C++/Youtube/Uri/build/test",
+  "command": "/bin/x86_64-linux-gnu-g++-9   -isystem /mntpliki_mic/C++/Youtube/Uri/googletest/googletest/include -isystem /mntpliki_mic/C++/Youtube/Uri/googletest/googletest  -g -fPIE   -std=gnu++11 -o CMakeFiles/UriTests.dir/UriTests.cpp.o -c /mntpliki_mic/C++/Youtube/Uri/test/UriTests.cpp",
+  "file": "/mntpliki_mic/C++/Youtube/Uri/test/UriTests.cpp"
 }
 ]

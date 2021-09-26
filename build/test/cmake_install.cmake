@@ -1,4 +1,4 @@
-# Install script for directory: /mnt/Pliki_Mic/C++/Youtube/Uri/test
+# Install script for directory: /mntpliki_mic/C++/Youtube/Uri/test
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

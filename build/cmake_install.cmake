@@ -1,4 +1,4 @@
-# Install script for directory: /mnt/Pliki_Mic/C++/Youtube/Uri
+# Install script for directory: /mntpliki_mic/C++/Youtube/Uri
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,8 +39,8 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/mnt/Pliki_Mic/C++/Youtube/Uri/build/googletest/cmake_install.cmake")
-  include("/mnt/Pliki_Mic/C++/Youtube/Uri/build/test/cmake_install.cmake")
+  include("/mntpliki_mic/C++/Youtube/Uri/build/googletest/cmake_install.cmake")
+  include("/mntpliki_mic/C++/Youtube/Uri/build/test/cmake_install.cmake")
 
 endif()
 
@@ -52,5 +52,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/mnt/Pliki_Mic/C++/Youtube/Uri/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/mntpliki_mic/C++/Youtube/Uri/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

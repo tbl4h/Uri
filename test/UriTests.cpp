@@ -22,11 +22,6 @@ TEST(UriTests, ParseFromString2) {
     ASSERT_TRUE(uri.ParseFromString("http://www.example.com/"));
     ASSERT_EQ("http",uri.GetScheme());
     ASSERT_EQ("www.example.com", uri.GetHost());
-    ASSERT_EQ(
-        (std::vector<std::string>{
-        ""
-    }),
-    uri.GetPath());
 };
 
 
@@ -60,7 +55,21 @@ TEST(UriTests, ParseFromStringPathCornerCases) {
     for (const auto& testVector : testVectors) {
         Uri::Uri uri;
         ASSERT_TRUE(uri.ParseFromString(testVector.pathIn)) << iter;
-        ASSERT_EQ(testVector.pathOut,uri.GetPath()) << iter;
+        ASSERT_EQ(testVector.pathOut,uri.GetPath()) ;
         iter++;
     }
 };
+TEST(UriTests, ParseFromStringHasAPortNumber){
+    Uri::Uri uri;
+    ASSERT_TRUE(uri.ParseFromString("http://www.example.com:8080/foo/bar"));
+    ASSERT_EQ("http",uri.GetScheme());
+    ASSERT_EQ("www.example.com",uri.GetHost());
+    ASSERT_EQ(
+        (std::vector<std::string>{
+            "",
+            "foo",
+            "bar",
+        }),
+        uri.GetPath()
+    );
+}

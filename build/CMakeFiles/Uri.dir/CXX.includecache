@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/mntpliki_mic/C++/Youtube/Uri/Uri.cpp
+Uri.hpp
+/mntpliki_mic/C++/Youtube/Uri/Uri.hpp
+string
+-
+vector
+-
+
+/mntpliki_mic/C++/Youtube/Uri/Uri.hpp
+memory
+-
+string
+-
+vector
+-
+
