@@ -28,6 +28,8 @@ namespace Uri {
             std::string GetScheme() const;
             std::string GetHost() const;
             std::vector<std::string> GetPath() const;
+            bool HasPort() const;
+            uint16_t GetPort() const;
             void setPathDelimiter(const std::string & newPathDelimiter);
             
         private:

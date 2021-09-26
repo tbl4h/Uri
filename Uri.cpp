@@ -8,7 +8,7 @@
 #include "Uri.hpp"
 #include <string>
 #include <vector>
-
+#include <stdint.h>
  namespace Uri {
      /**
       * This contains the private properties of a Uri instance
@@ -19,6 +19,8 @@
          std::string host;
          std::vector<std::string> path;
          std::string pathDelimiter = "/";
+         uint16_t port;
+         bool hasPort = false;
      };
      Uri::~Uri() = default;
 
@@ -37,7 +39,17 @@
         auto rest = uriString.substr(schemeEnd + 1);
         if (rest.substr(0,2) == "//"){
             const auto authorityEnd = rest.find(impl_->pathDelimiter,2);
-            impl_->host = rest.substr(2, authorityEnd - 2);
+            const auto portDelimiter = rest.find(':');
+            if(portDelimiter == std::string::npos){
+                impl_->host = rest.substr(2, authorityEnd - 2);
+            }else{
+                impl_->hasPort = true;
+                int portLength = 0;
+                while(isdigit(rest[portDelimiter+portLength+1]))
+                    portLength++;
+                impl_->port = std::stoi(rest.substr(portDelimiter+1,portDelimiter+portLength));
+                impl_->host = rest.substr(2, portDelimiter - 2);                
+            }
             rest = rest.substr(authorityEnd );
         } else {
              impl_->host.clear();
@@ -83,5 +95,11 @@
     };
     std::vector<std::string> Uri::GetPath() const {
         return impl_->path;
+    };
+    bool Uri::HasPort() const {
+        return impl_->hasPort;
+    };
+    uint16_t Uri::GetPort() const {
+        return impl_->port;
     };
  }

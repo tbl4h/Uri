@@ -64,12 +64,6 @@ TEST(UriTests, ParseFromStringHasAPortNumber){
     ASSERT_TRUE(uri.ParseFromString("http://www.example.com:8080/foo/bar"));
     ASSERT_EQ("http",uri.GetScheme());
     ASSERT_EQ("www.example.com",uri.GetHost());
-    ASSERT_EQ(
-        (std::vector<std::string>{
-            "",
-            "foo",
-            "bar",
-        }),
-        uri.GetPath()
-    );
-}
+    ASSERT_TRUE(uri.HasPort());
+    ASSERT_EQ(8080,uri.GetPort());
+};
