@@ -45,9 +45,20 @@
             }else{
                 impl_->hasPort = true;
                 int portLength = 0;
+                uint16_t isValidPort = 0;
                 while(isdigit(rest[portDelimiter+portLength+1]))
                     portLength++;
-                impl_->port = std::stoi(rest.substr(portDelimiter+1,portDelimiter+portLength));
+                if(portLength > 0)
+                    isValidPort = std::stoi(rest.substr(portDelimiter+1,portDelimiter+portLength));
+                else 
+                    impl_->hasPort = false;
+                if (isValidPort <= 65535){
+                    impl_->port = isValidPort;
+                }else{ 
+                    impl_->hasPort = false;
+                    impl_->port = 0;
+                }
+
                 impl_->host = rest.substr(2, portDelimiter - 2);                
             }
             rest = rest.substr(authorityEnd );
