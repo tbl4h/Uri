@@ -1,0 +1,46 @@
+Start testing: Sep 11 01:34 CEST
+----------------------------------------------------------
+1/1 Testing: UriTests
+1/1 Test: UriTests
+Command: "/mnt/Pliki_Mic/C++/Youtube/Uri/build/test/UriTests"
+Directory: /mnt/Pliki_Mic/C++/Youtube/Uri/build/test
+"UriTests" start time: Sep 11 01:34 CEST
+Output:
+----------------------------------------------------------
+Running main() from ../googletest/googletest/src/gtest_main.cc
+[==========] Running 4 tests from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 4 tests from UriTests
+[ RUN      ] UriTests.ParseFromString
+[       OK ] UriTests.ParseFromString (0 ms)
+[ RUN      ] UriTests.ParseFromString2
+[       OK ] UriTests.ParseFromString2 (0 ms)
+[ RUN      ] UriTests.ParseFromString3
+[       OK ] UriTests.ParseFromString3 (0 ms)
+[ RUN      ] UriTests.ParseFromStringPathCornerCases
+../test/UriTests.cpp:63: Failure
+Expected equality of these values:
+  testVector.pathOut
+    Which is: { "foo", "" }
+  uri.GetPath()
+    Which is: { "foo" }
+3
+[  FAILED  ] UriTests.ParseFromStringPathCornerCases (0 ms)
+[----------] 4 tests from UriTests (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 4 tests from 1 test suite ran. (0 ms total)
+[  PASSED  ] 3 tests.
+[  FAILED  ] 1 test, listed below:
+[  FAILED  ] UriTests.ParseFromStringPathCornerCases
+
+ 1 FAILED TEST
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Failed.
+"UriTests" end time: Sep 11 01:34 CEST
+"UriTests" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Sep 11 01:34 CEST

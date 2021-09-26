@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Site BuildName="(empty)"
+	BuildStamp="20210909-2259-Experimental"
+	Name="(empty)"
+	Generator="ctest-3.16.3"
+	CompilerName=""
+	CompilerVersion=""
+	OSName="Linux"
+	Hostname="mic-desktop"
+	OSRelease="5.11.0-34-generic"
+	OSVersion="#36~20.04.1-Ubuntu SMP Fri Aug 27 08:06:32 UTC 2021"
+	OSPlatform="x86_64"
+	Is64Bits="1"
+	VendorString="AuthenticAMD"
+	VendorID="Advanced Micro Devices"
+	FamilyID="23"
+	ModelID="113"
+	ProcessorCacheSize="512"
+	NumberOfLogicalCPU="8"
+	NumberOfPhysicalCPU="4"
+	TotalVirtualMemory="2047"
+	TotalPhysicalMemory="15939"
+	LogicalProcessorsPerPhysical="2"
+	ProcessorClockFrequency="2907.75"
+	>
+	<Testing>
+		<StartDateTime>Sep 10 01:00 CEST</StartDateTime>
+		<StartTestTime>1631228419</StartTestTime>
+		<TestList>
+			<Test>./test/UriTests</Test>
+		</TestList>
+		<Test Status="passed">
+			<Name>UriTests</Name>
+			<Path>./test</Path>
+			<FullName>./test/UriTests</FullName>
+			<FullCommandLine>/mnt/Pliki_Mic/C++/Youtube/Uri/build/test/UriTests</FullCommandLine>
+			<Results>
+				<NamedMeasurement type="numeric/double" name="Execution Time">
+					<Value>0.00254877</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Completed</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value>/mnt/Pliki_Mic/C++/Youtube/Uri/build/test/UriTests</Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value encoding="base64" compression="gzip">eJyVkb0OgjAQgPc+xY0yUBVmBxN/BhMloBMhpmIlTeBq2qKvbwuGiImKN13br197d3GNKLCAigkceXBRsgJKx4WURckN1+Y11SofFy47OpzmOUlnXWQQP10hOEa3smmzAF0LwylJ/S4yWJfyxMr2nONNKIkVR8ty49fXN7gnPSixdyuSQnzYQhNZt0sjpjRfWTAxyn7IUm3sNl8oGE2g0t4wZTDMGfwlDYdJw076sz8tCUYaVnpkWPcNZ8o/yzv2h/txqKAY0v5DtoxoniTLhav2eZGSB4w6wgw=</Value>
+				</Measurement>
+			</Results>
+		</Test>
+		<EndDateTime>Sep 10 01:00 CEST</EndDateTime>
+		<EndTestTime>1631228419</EndTestTime>
+		<ElapsedMinutes>0</ElapsedMinutes>
+	</Testing>
+</Site>

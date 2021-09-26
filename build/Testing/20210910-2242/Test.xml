@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Site BuildName="(empty)"
+	BuildStamp="20210910-2242-Experimental"
+	Name="(empty)"
+	Generator="ctest-3.16.3"
+	CompilerName=""
+	CompilerVersion=""
+	OSName="Linux"
+	Hostname="mic-desktop"
+	OSRelease="5.11.0-34-generic"
+	OSVersion="#36~20.04.1-Ubuntu SMP Fri Aug 27 08:06:32 UTC 2021"
+	OSPlatform="x86_64"
+	Is64Bits="1"
+	VendorString="AuthenticAMD"
+	VendorID="Advanced Micro Devices"
+	FamilyID="23"
+	ModelID="113"
+	ProcessorCacheSize="512"
+	NumberOfLogicalCPU="8"
+	NumberOfPhysicalCPU="4"
+	TotalVirtualMemory="2047"
+	TotalPhysicalMemory="15939"
+	LogicalProcessorsPerPhysical="2"
+	ProcessorClockFrequency="2200"
+	>
+	<Testing>
+		<StartDateTime>Sep 11 01:34 CEST</StartDateTime>
+		<StartTestTime>1631316848</StartTestTime>
+		<TestList>
+			<Test>./test/UriTests</Test>
+		</TestList>
+		<Test Status="failed">
+			<Name>UriTests</Name>
+			<Path>./test</Path>
+			<FullName>./test/UriTests</FullName>
+			<FullCommandLine>/mnt/Pliki_Mic/C++/Youtube/Uri/build/test/UriTests</FullCommandLine>
+			<Results>
+				<NamedMeasurement type="text/string" name="Exit Code">
+					<Value>Failed</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Exit Value">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="numeric/double" name="Execution Time">
+					<Value>0.00305925</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Completed</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value>/mnt/Pliki_Mic/C++/Youtube/Uri/build/test/UriTests</Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value encoding="base64" compression="gzip">eJydkltPwjAUx9/7KU72xBIoCsaHJT4QBGI0QrjoAyGmjMPWpGtn24HG+N3tNrI44wU8T23P7/x7btNMSi4jSBiXDR+2WiVAaTtSKhJo0djPR6PDdpSfnnKchiFZXlW2gulB6wJyxpRi58UFTMYtUrJsVbaCkVBrJko/yh3XSiYoHYu2laVf4JroQvN5fiNLmC7uobBV9UonTBscOnBmtUvIUaWNb3+hoHEGifGPk+wcp9k5SbR7nGj3JNEJs3FfaYm6zwwa4oZbzLLiwzQNLrsBDBkXmUYyeEkxtLgBfM6Y4PYV1BZsjAZhx0SGJiBQzOLBYUrT1H0wzizJ03iMeRgDNwG8gbdVymuC58G782Wa0xHaPJuG/z3ruKIDw97N3eD6hJqqfvy5LyUJVlkmfHLcNlpkurVRe1lf9h+XHDSTtP6RK2rSm83KorplIK2XWio0QXCT936NQu2Df3WDECd2iJoPZnPyAfK1Oqc=</Value>
+				</Measurement>
+			</Results>
+		</Test>
+		<EndDateTime>Sep 11 01:34 CEST</EndDateTime>
+		<EndTestTime>1631316848</EndTestTime>
+		<ElapsedMinutes>0</ElapsedMinutes>
+	</Testing>
+</Site>
