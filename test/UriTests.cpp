@@ -74,7 +74,7 @@ TEST(UriTests, ParseFromStringHasNotAPortNumber){
     ASSERT_EQ("http",uri.GetScheme());
     ASSERT_EQ("www.example.com",uri.GetHost());
     ASSERT_FALSE(uri.HasPort());
-    ASSERT_EQ(0,uri.GetPort());
+    ASSERT_EQ(80,uri.GetPort());
 };
 TEST(UriTests, ParseFromStringHasNotAPortNegative){
     Uri::Uri uri;
@@ -89,5 +89,30 @@ TEST(UriTests, ParseFromStringHasNotAPortSpamAndValid){
     ASSERT_EQ("http",uri.GetScheme());
     ASSERT_EQ("www.example.com",uri.GetHost());
     ASSERT_FALSE(uri.HasPort());
-    ASSERT_EQ(0,uri.GetPort());
+    ASSERT_EQ(80,uri.GetPort());
+};
+TEST(UriTests, ParseFromStringIsRelativeVsNonRelativePaths) {
+    struct TestVector {
+        std::string uriString;
+        bool isRelative;
+    };
+    const std::vector<TestVector> testVectors {
+        {"http://www.ecample.com/",false},
+        {"http://www.example.com", false},
+        {"/",true},
+        {"foo",true},
+    };
+    int iter = 0;
+    for (const auto& testVector : testVectors) {
+        Uri::Uri uri;
+        ASSERT_TRUE(uri.ParseFromString(testVector.uriString)) << iter;
+        ASSERT_EQ(testVector.isRelative,uri.IsRelativeReference());
+        iter++;
+    }
+};
+
+TEST(UriTests, ParseFromStringEndAfterAuthority) {
+    Uri::Uri uri;
+    ASSERT_TRUE(uri.ParseFromString("http://www.example.com/"));
+    
 };

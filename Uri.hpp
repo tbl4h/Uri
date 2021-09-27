@@ -30,6 +30,7 @@ namespace Uri {
             std::vector<std::string> GetPath() const;
             bool HasPort() const;
             uint16_t GetPort() const;
+            bool IsRelativeReference() const;
             void setPathDelimiter(const std::string & newPathDelimiter);
             
         private:
