@@ -52,7 +52,7 @@
                     isValidPort = std::stoi(rest.substr(portDelimiter+1,portDelimiter+portLength));
                 else 
                     impl_->hasPort = false;
-                if (isValidPort <= 65535){
+                if (isValidPort <= 65535 && isValidPort > 0){
                     impl_->port = isValidPort;
                 }else{ 
                     impl_->hasPort = false;

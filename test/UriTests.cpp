@@ -76,3 +76,18 @@ TEST(UriTests, ParseFromStringHasNotAPortNumber){
     ASSERT_FALSE(uri.HasPort());
     ASSERT_EQ(0,uri.GetPort());
 };
+TEST(UriTests, ParseFromStringHasNotAPortNegative){
+    Uri::Uri uri;
+    ASSERT_TRUE(uri.ParseFromString("http://www.example.com:-123/foo/bar"));
+    ASSERT_EQ("http",uri.GetScheme());
+    ASSERT_EQ("www.example.com",uri.GetHost());
+    ASSERT_FALSE(uri.HasPort());    
+};
+TEST(UriTests, ParseFromStringHasNotAPortSpamAndValid){
+    Uri::Uri uri;
+    ASSERT_TRUE(uri.ParseFromString("http://www.example.com:spam123/foo/bar"));
+    ASSERT_EQ("http",uri.GetScheme());
+    ASSERT_EQ("www.example.com",uri.GetHost());
+    ASSERT_FALSE(uri.HasPort());
+    ASSERT_EQ(0,uri.GetPort());
+};
