@@ -31,6 +31,9 @@ namespace Uri {
             bool HasPort() const;
             uint16_t GetPort() const;
             bool IsRelativeReference() const;
+            bool ContainRelativePath() const;
+            std::string GetFragment() const;
+            std::string GetQuery() const;
             void setPathDelimiter(const std::string & newPathDelimiter);
             
         private:

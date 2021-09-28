@@ -23,7 +23,8 @@ namespace Uri
         std::string pathDelimiter = "/";
         uint16_t port;
         bool hasPort = false;
-        // bool isRelativeReference = false;
+        std::string fragment;
+        std::string query;
     };
     Uri::~Uri() = default;
 
@@ -40,8 +41,28 @@ namespace Uri
     bool Uri::ParseFromString(const std::string &uriString)
     {
         const auto schemeEnd = uriString.find(':');
-        std::string rest;
-        bool noAuthorityDelimiterEnd = false;
+        std::string rest = uriString;
+        size_t fragmentDelimiter;
+        fragmentDelimiter = rest.find('#');
+        if (fragmentDelimiter == std::string::npos)
+        {
+            impl_->fragment = "";
+        }
+        else
+        {            
+            impl_->fragment = rest.substr(fragmentDelimiter + 1, rest.length());
+            rest = rest.substr(0, fragmentDelimiter);
+        }
+        auto queryDelimiter = rest.find('?');
+        if (queryDelimiter == std::string::npos)
+        {
+            impl_->query = "";
+        }
+        else
+        {            
+            impl_->query = rest.substr(queryDelimiter + 1, rest.length());
+            rest = rest.substr(0, queryDelimiter);
+        }
         if (schemeEnd == std::string::npos)
         {
             impl_->scheme.clear();
@@ -54,19 +75,19 @@ namespace Uri
         }
         if (rest.substr(0, 2) == "//")
         {
-            auto authorityEnd = rest.find(impl_->pathDelimiter, 2);            
+            auto authorityEnd = rest.find(impl_->pathDelimiter, 2);
             const auto portDelimiter = rest.find(':');
             if (portDelimiter == std::string::npos)
             {
                 impl_->host = rest.substr(2, authorityEnd - 2);
-                if(!impl_->scheme.empty())
-                    if(impl_->scheme == "http")
+                if (!impl_->scheme.empty())
+                    if (impl_->scheme == "http")
                         impl_->port = 80;
-                    else if(impl_->scheme == "https")
+                    else if (impl_->scheme == "https")
                         impl_->port = 443;
-                    /*TO DO
+                /*TO DO
                      *Possible Other variant of uri scheme
-                     */ 
+                     */
             }
             else
             {
@@ -86,21 +107,22 @@ namespace Uri
                 else
                 {
                     impl_->hasPort = false;
-                    if(impl_->scheme == "http")
+                    if (impl_->scheme == "http")
                         impl_->port = 80;
-                    else if(impl_->scheme == "https")
+                    else if (impl_->scheme == "https")
                         impl_->port = 443;
                 }
 
                 impl_->host = rest.substr(2, portDelimiter - 2);
-            }            
-            if((impl_->host.empty() == false && impl_->port == 80) || (impl_->host.empty() == false && impl_->port == 443)){
-                impl_->authority = rest.substr(2,authorityEnd - 2);
+            }
+            if ((impl_->host.empty() == false && impl_->port == 80) || (impl_->host.empty() == false && impl_->port == 443))
+            {
+                impl_->authority = rest.substr(2, authorityEnd - 2);
             }
             if (authorityEnd == std::string::npos)
             {
                 authorityEnd = rest.length();
-            }                                    
+            }
             rest = rest.substr(authorityEnd);
         }
         else
@@ -133,7 +155,9 @@ namespace Uri
                     rest.begin(),
                     rest.begin() + pathDelimiter);
                 if (isLast == true)
+                {
                     rest = rest.substr(pathDelimiter);
+                }
                 else
                     rest = rest.substr(pathDelimiter + impl_->pathDelimiter.length());
             }
@@ -165,8 +189,22 @@ namespace Uri
     };
     bool Uri::IsRelativeReference() const
     {
- 
         return impl_->authority.empty();
-
+    };
+    bool Uri::ContainRelativePath() const
+    {
+        if (impl_->path.empty())
+            return true;
+        else
+        {
+            return !impl_->path[0].empty();
+        }
+    };
+    std::string Uri::GetFragment() const
+    {
+        return impl_->fragment;
+    };
+    std::string Uri::GetQuery() const{
+        return impl_->query;
     };
 }

@@ -116,3 +116,66 @@ TEST(UriTests, ParseFromStringEndAfterAuthority) {
     ASSERT_TRUE(uri.ParseFromString("http://www.example.com/"));
     
 };
+TEST(UriTests, ParseFromStringContainsRelativePath) {
+    struct TestVector {
+        std::string uriString;
+        bool containRelative;
+    };
+    const std::vector<TestVector> testVectors {
+        {"http://www.ecample.com/",false},
+        {"http://www.example.com", true},
+        {"/",false},
+        {"foo",true},
+        /*
+         *This is only valid test vector if we underastand
+         *correctly that an empty string is a valid 
+         *relative reference uri with an empty path.
+         */
+        {"",true},
+    };
+    int iter = 0;
+    for (const auto& testVector : testVectors) {
+        Uri::Uri uri;
+        ASSERT_TRUE(uri.ParseFromString(testVector.uriString)) << iter;
+        ASSERT_EQ(testVector.containRelative,uri.ContainRelativePath());
+        iter++;
+    }
+};
+TEST(UriTests, ParseFromStringFragment) {
+    struct TestVector {
+        std::string uriString;
+        std::string fragment;
+    };
+    const std::vector<TestVector> testVectors {
+        {"http://www.ecample.com/",""},
+        {"http://www.example.com?foo", ""},
+        {"http://www.example.com#foo", "foo"},
+        {"http://www.example.com?foo#bar", "bar"},
+    };
+    int iter = 0;
+    for (const auto& testVector : testVectors) {
+        Uri::Uri uri;
+        ASSERT_TRUE(uri.ParseFromString(testVector.uriString)) << iter;
+        ASSERT_EQ(testVector.fragment,uri.GetFragment());
+        iter++;
+    }
+};
+TEST(UriTests, ParseFromStringQuery) {
+    struct TestVector {
+        std::string uriString;
+        std::string query;
+    };
+    const std::vector<TestVector> testVectors {
+        {"http://www.ecample.com/",""},
+        {"http://www.example.com?foo", "foo"},
+        {"http://www.example.com#foo", ""},
+        {"http://www.example.com?foo#bar", "foo"},
+    };
+    int iter = 0;
+    for (const auto& testVector : testVectors) {
+        Uri::Uri uri;
+        ASSERT_TRUE(uri.ParseFromString(testVector.uriString)) << iter;
+        ASSERT_EQ(testVector.query,uri.GetQuery());
+        iter++;
+    }
+};
