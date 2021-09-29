@@ -92,12 +92,12 @@ namespace Uri
         }
         else
         {
-            impl_->userInfo = uri.substr(userInfoDelimiter);
+            impl_->userInfo = uri.substr(0,userInfoDelimiter);
             uri = uri.substr(userInfoDelimiter + 1, uri.length());
             return true;
         }
     }
-    bool Uri::ParsePortHostAndAuthority(std::string &uri)
+    void Uri::ParsePortHostAndAuthority(std::string &uri)
     {
         auto authorityEnd = uri.find('/');
         const auto portDelimiter = uri.find(':');
@@ -145,7 +145,7 @@ namespace Uri
             if(authorityEnd+1 != uri.length())
                 uri = uri.substr(authorityEnd+1,uri.length());
             else
-                uri = uri.substr(authorityEnd,uri.length())
+                uri = uri.substr(authorityEnd,uri.length());
         }
         if (authorityEnd == std::string::npos)
         {

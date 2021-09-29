@@ -41,7 +41,7 @@ namespace Uri {
             bool ParseQuery(std::string& uri);
             bool ParseScheme(std::string& uri);
             bool ParseUserInfo(std::string& uri);
-            bool ParsePortHostAndAuthority(std::string& uri);
+            void ParsePortHostAndAuthority(std::string& uri);
         private:
             struct Impl;
             std::unique_ptr<struct Impl > impl_; 
