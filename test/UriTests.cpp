@@ -10,7 +10,6 @@ TEST(UriTests, ParseFromString) {
     ASSERT_EQ("www.example.com", uri.GetHost());
     ASSERT_EQ(
         (std::vector<std::string>{
-        "",
         "foo",
         "bar",        
     }),
@@ -24,22 +23,6 @@ TEST(UriTests, ParseFromString2) {
     ASSERT_EQ("www.example.com", uri.GetHost());
 };
 
-
-TEST(UriTests, ParseFromString3) {
-    Uri::Uri uri;
-    uri.setPathDelimiter(":");
-    ASSERT_TRUE(uri.ParseFromString("urn:book:fantasy:Hobbit"));
-    ASSERT_EQ("urn",uri.GetScheme());
-    ASSERT_EQ("", uri.GetHost());
-    ASSERT_EQ(
-        (std::vector<std::string>{
-        "book",
-        "fantasy",
-        "Hobbit",
-
-    }),    
-     uri.GetPath());
-};
 TEST(UriTests, ParseFromStringPathCornerCases) {
     struct TestVector {
         std::string pathIn;
@@ -122,7 +105,7 @@ TEST(UriTests, ParseFromStringContainsRelativePath) {
         bool containRelative;
     };
     const std::vector<TestVector> testVectors {
-        {"http://www.ecample.com/",false},
+        {"http://www.example.com/",false},
         {"http://www.example.com", true},
         {"/",false},
         {"foo",true},
@@ -170,12 +153,34 @@ TEST(UriTests, ParseFromStringQuery) {
         {"http://www.example.com?foo", "foo"},
         {"http://www.example.com#foo", ""},
         {"http://www.example.com?foo#bar", "foo"},
+        {"http://www.example.com?foo?earth#bar", "foo?earth"},
+        {"http://www.example.com/?", ""},
     };
     int iter = 0;
     for (const auto& testVector : testVectors) {
         Uri::Uri uri;
         ASSERT_TRUE(uri.ParseFromString(testVector.uriString)) << iter;
         ASSERT_EQ(testVector.query,uri.GetQuery());
+        iter++;
+    }
+};
+TEST(UriTests, ParseFromStringUserInfo) {
+    struct TestVector {
+        std::string uriString;
+        std::string userInfo;
+    };
+    const std::vector<TestVector> testVectors {
+        {"http://www.ecample.com/",""},
+        {"http://joe@www.example.com", "joe"},
+        {"/",""},
+        {"foo",""},
+
+    };
+    int iter = 0;
+    for (const auto& testVector : testVectors) {
+        Uri::Uri uri;
+        ASSERT_TRUE(uri.ParseFromString(testVector.uriString)) << iter;
+        ASSERT_EQ(testVector.userInfo,uri.GetUserInfo());
         iter++;
     }
 };

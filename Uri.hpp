@@ -34,11 +34,17 @@ namespace Uri {
             bool ContainRelativePath() const;
             std::string GetFragment() const;
             std::string GetQuery() const;
-            void setPathDelimiter(const std::string & newPathDelimiter);
-            
+            std::string GetUserInfo() const;            
+        // private method
+        private:
+            bool ParseFragment(std::string& uri);    
+            bool ParseQuery(std::string& uri);
+            bool ParseScheme(std::string& uri);
+            bool ParseUserInfo(std::string& uri);
+            bool ParsePortHostAndAuthority(std::string& uri);
         private:
             struct Impl;
-
             std::unique_ptr<struct Impl > impl_; 
+        
     };
 }

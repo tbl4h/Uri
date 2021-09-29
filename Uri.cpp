@@ -20,11 +20,11 @@ namespace Uri
         std::string authority;
         std::string host;
         std::vector<std::string> path;
-        std::string pathDelimiter = "/";
         uint16_t port;
         bool hasPort = false;
         std::string fragment;
         std::string query;
+        std::string userInfo;
     };
     Uri::~Uri() = default;
 
@@ -33,133 +33,166 @@ namespace Uri
     {
     }
 
-    void Uri::setPathDelimiter(const std::string &newPathDelimiter)
+    bool Uri::ParseFragment(std::string &uri)
     {
-        impl_->pathDelimiter = newPathDelimiter;
-    };
-
-    bool Uri::ParseFromString(const std::string &uriString)
-    {
-        const auto schemeEnd = uriString.find(':');
-        std::string rest = uriString;
-        size_t fragmentDelimiter;
-        fragmentDelimiter = rest.find('#');
+        const auto fragmentDelimiter = uri.find('#');
         if (fragmentDelimiter == std::string::npos)
         {
-            impl_->fragment = "";
+            impl_->fragment.clear();
+            return false;
         }
         else
-        {            
-            impl_->fragment = rest.substr(fragmentDelimiter + 1, rest.length());
-            rest = rest.substr(0, fragmentDelimiter);
+        {
+            impl_->fragment = uri.substr(fragmentDelimiter + 1, uri.length());
+            uri = uri.substr(0, fragmentDelimiter);
+            return true;
         }
-        auto queryDelimiter = rest.find('?');
+    };
+    bool Uri::ParseQuery(std::string &uri)
+    {
+        auto queryDelimiter = uri.find('?');
         if (queryDelimiter == std::string::npos)
         {
-            impl_->query = "";
+            impl_->query.clear();
+            return false;
         }
         else
-        {            
-            impl_->query = rest.substr(queryDelimiter + 1, rest.length());
-            rest = rest.substr(0, queryDelimiter);
+        {
+            impl_->query = uri.substr(queryDelimiter + 1, uri.length());
+            uri = uri.substr(0, queryDelimiter);
+            return true;
         }
+    }
+    bool Uri::ParseScheme(std::string &uri)
+    {
+        const auto schemeEnd = uri.find(':');
         if (schemeEnd == std::string::npos)
         {
             impl_->scheme.clear();
-            rest = uriString;
+            return false;
         }
         else
         {
-            impl_->scheme = uriString.substr(0, schemeEnd);
-            rest = uriString.substr(schemeEnd + 1);
+            impl_->scheme = uri.substr(0, schemeEnd);
+            uri = uri.substr(schemeEnd + 1);
+            if (uri.substr(0, 2) == "//")
+                uri = uri.substr(2, uri.length());
+            else
+                impl_->host.clear();
+            return true;
         }
-        if (rest.substr(0, 2) == "//")
+    }
+    bool Uri::ParseUserInfo(std::string &uri)
+    {
+        const auto userInfoDelimiter = uri.find('@');
+        if (userInfoDelimiter == std::string::npos)
         {
-            auto authorityEnd = rest.find(impl_->pathDelimiter, 2);
-            const auto portDelimiter = rest.find(':');
-            if (portDelimiter == std::string::npos)
-            {
-                impl_->host = rest.substr(2, authorityEnd - 2);
-                if (!impl_->scheme.empty())
-                    if (impl_->scheme == "http")
-                        impl_->port = 80;
-                    else if (impl_->scheme == "https")
-                        impl_->port = 443;
-                /*TO DO
+            impl_->userInfo = "";
+            return false;
+        }
+        else
+        {
+            impl_->userInfo = uri.substr(userInfoDelimiter);
+            uri = uri.substr(userInfoDelimiter + 1, uri.length());
+            return true;
+        }
+    }
+    bool Uri::ParsePortHostAndAuthority(std::string &uri)
+    {
+        auto authorityEnd = uri.find('/');
+        const auto portDelimiter = uri.find(':');
+        if (portDelimiter == std::string::npos)
+        {   
+            if(!impl_->scheme.empty())            
+                impl_->host = uri.substr(0,authorityEnd);
+            if (!impl_->scheme.empty())
+                if (impl_->scheme == "http")
+                    impl_->port = 80;
+                else if (impl_->scheme == "https")
+                    impl_->port = 443;
+            /*TO DO
                      *Possible Other variant of uri scheme
                      */
+        }
+        else
+        {
+            impl_->hasPort = true;
+            int portLength = 0;
+            uint16_t isValidPort = 0;
+            while (isdigit(uri[portDelimiter + portLength + 1]))
+                portLength++;
+            if (portLength > 0)
+                isValidPort = std::stoi(uri.substr(portDelimiter + 1, portDelimiter + portLength));
+            else
+                impl_->hasPort = false;
+            if (isValidPort <= 65535 && isValidPort > 0)
+            {
+                impl_->port = isValidPort;
             }
             else
             {
-                impl_->hasPort = true;
-                int portLength = 0;
-                uint16_t isValidPort = 0;
-                while (isdigit(rest[portDelimiter + portLength + 1]))
-                    portLength++;
-                if (portLength > 0)
-                    isValidPort = std::stoi(rest.substr(portDelimiter + 1, portDelimiter + portLength));
-                else
-                    impl_->hasPort = false;
-                if (isValidPort <= 65535 && isValidPort > 0)
-                {
-                    impl_->port = isValidPort;
-                }
-                else
-                {
-                    impl_->hasPort = false;
-                    if (impl_->scheme == "http")
-                        impl_->port = 80;
-                    else if (impl_->scheme == "https")
-                        impl_->port = 443;
-                }
-
-                impl_->host = rest.substr(2, portDelimiter - 2);
+                impl_->hasPort = false;
+                if (impl_->scheme == "http")
+                    impl_->port = 80;
+                else if (impl_->scheme == "https")
+                    impl_->port = 443;
             }
-            if ((impl_->host.empty() == false && impl_->port == 80) || (impl_->host.empty() == false && impl_->port == 443))
-            {
-                impl_->authority = rest.substr(2, authorityEnd - 2);
-            }
-            if (authorityEnd == std::string::npos)
-            {
-                authorityEnd = rest.length();
-            }
-            rest = rest.substr(authorityEnd);
+            impl_->host = uri.substr(0,portDelimiter);
         }
-        else
+        if ((!impl_->host.empty() && impl_->port == 80) || (!impl_->host.empty() && impl_->port == 443))
         {
-            impl_->host.clear();
+            impl_->authority = uri.substr(0,authorityEnd);
+            if(authorityEnd+1 != uri.length())
+                uri = uri.substr(authorityEnd+1,uri.length());
+            else
+                uri = uri.substr(authorityEnd,uri.length())
         }
+        if (authorityEnd == std::string::npos)
+        {
+            authorityEnd = uri.length();
+        }        
+    }
+    bool Uri::ParseFromString(const std::string &uriString)
+    {
+        std::string uri = uriString;
+
+        ParseFragment(uri);
+        ParseQuery(uri);
+        ParseScheme(uri);
+        ParseUserInfo(uri);
+        ParsePortHostAndAuthority(uri);
+
         bool isLast = false;
         bool isLastDelimeter = false;
         size_t pathDelimiter;
-        if ((pathDelimiter = rest.find(impl_->pathDelimiter)) != std::string::npos)
+        if ((pathDelimiter = uri.find('/')) != std::string::npos)
         {
-            if (pathDelimiter == (rest.length() - impl_->pathDelimiter.length()))
+            if (pathDelimiter == (uri.length() - 1))
             {
-                std::string isDelimeter = rest.substr(rest.find(impl_->pathDelimiter), rest.length());
-                if (isDelimeter == impl_->pathDelimiter)
+                std::string isDelimeter = uri.substr(uri.find('/'), uri.length());
+                if (isDelimeter == "/")
                     isLastDelimeter = true;
             }
         }
-        if (!(rest.length() == impl_->pathDelimiter.length() && isLastDelimeter == true))
+        if (!(uri.length() == 1 && isLastDelimeter == true))
         {
-            while (!rest.empty())
+            while (!uri.empty())
             {
-                pathDelimiter = rest.find(impl_->pathDelimiter);
+                pathDelimiter = uri.find('/');
                 if (pathDelimiter == std::string::npos)
                 {
-                    pathDelimiter = rest.length();
+                    pathDelimiter = uri.length();
                     isLast = true;
                 }
                 impl_->path.emplace_back(
-                    rest.begin(),
-                    rest.begin() + pathDelimiter);
+                    uri.begin(),
+                    uri.begin() + pathDelimiter);
                 if (isLast == true)
                 {
-                    rest = rest.substr(pathDelimiter);
+                    uri = uri.substr(pathDelimiter);
                 }
                 else
-                    rest = rest.substr(pathDelimiter + impl_->pathDelimiter.length());
+                    uri = uri.substr(pathDelimiter + 1);
             }
         }
         if (isLastDelimeter == true)
@@ -204,7 +237,12 @@ namespace Uri
     {
         return impl_->fragment;
     };
-    std::string Uri::GetQuery() const{
+    std::string Uri::GetQuery() const
+    {
         return impl_->query;
+    };
+    std::string Uri::GetUserInfo() const
+    {
+        return impl_->userInfo;
     };
 }
